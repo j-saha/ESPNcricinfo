@@ -1,0 +1,256 @@
+{% extends 'homepage/base.html' %}
+      {% load static %}
+      {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+{#    <title>Sign Up Form by Colorlib</title>#}
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'addseries/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'addseries/css/style.css' %}">
+</head>
+<body>
+
+    <div class="main">
+        <div class="container">
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                  <li class="buy-tickets"><a id="nav-admin" href="{% url 'adminpage' %}">ADMIN PAGE</a></li>
+                </ul>
+            </nav>
+
+
+            <div class="signup-content">
+                <div class="signup-img">
+                    <br><br>
+                    <img src="{% static 'addseries/images/addseries.jpg' %}" alt="">
+                </div>
+                <div class="signup-form">
+                    <form method="POST" class="register-form" id="register-form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h2>ENTER A SERIES DETAILS</h2>
+
+                        <div class="form-group">
+                            <label for="name" class="required">Series Name :</label>
+                            <input type="text" name="name" id="name" required/>
+                        </div>
+                        <div class="form-input">
+                            <label for="team1_opp" class="required">Host Country(Team 1) :</label>
+                            <input list="team1_opp" name="team1" id="team1" required/>
+                            <datalist id="team1_opp">
+                                {% for t in team %}
+                                    <option>{{ t.team_name }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                        <div class="form-input">
+                            <label for="team2_opp" class="required">Team 2 :</label>
+                            <input list="team2_opp" name="team2" id="team2" required/>
+                            <datalist id="team2_opp">
+                                {% for t in team %}
+                                    <option>{{ t.team_name }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                        <div class="form-input">
+                            <label for="team3_opp">Team 3 :</label>
+                            <input list="team3_opp" name="team3" id="team3"/>
+                            <datalist id="team3_opp">
+                                {% for t in team %}
+                                    <option>{{ t.team_name }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                        <div class="form-input">
+                            <label for="team4_opp">Team 4 :</label>
+                            <input list="team4_opp" name="team4" id="team4"/>
+                            <datalist id="team4_opp">
+                                {% for t in team %}
+                                    <option>{{ t.team_name }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                        <div class="form-input">
+                            <label for="winner_opp">Winner :</label>
+                            <input list="winner_opp" name="winner" id="winner"/>
+                            <datalist id="winner_opp">
+                                {% for t in team %}
+                                    <option>{{ t.team_name }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                        <div class="form-input">
+                            <label for="motm_lbl">Man of the Series :</label>
+                            <input list="motm_lbl" name="motm" id="motm"/>
+                            <datalist id="motm_lbl">
+                                {% for p in player %}
+                                    <option>{{ p.fullname }}</option>
+                                {% endfor %}
+
+                            </datalist>
+                        </div>
+                         <div class="form-input">
+                            <label for="start_date" class="required">START DATE</label>
+                            <input type="date" name="start_date" id="start_date" placeholder="DD-MON-YYYY" required/>
+                        </div>
+                        <div class="form-input">
+                            <label for="end_date" class="required">END DATE</label>
+                            <input type="date" name="end_date" id="end_date" placeholder="DD-MON-YYYY" required/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">IMAGE :</label>
+                            <input type="file" name="image" id="image" accept="image/*">
+                        </div>
+                        <!--<div class="form-group">
+                            <label for="email">Email ID :</label>
+                            <input type="email" name="email" id="email" />
+                        </div>-->
+                        <div class="form-submit">
+                            <input type="submit" value="Reset All" class="submit" name="reset" id="reset" />
+                            <input type="submit" value="Submit Form" class="submit" name="submit" id="submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'addground/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'addground/js/main.js' %}"></script>
+    <script>
+          document.getElementById('nav-about').hidden=true;
+          document.getElementById('nav-series').hidden=true;
+          document.getElementById('nav-teams').hidden=true;
+          document.getElementById('nav-contact').hidden=true;
+          document.getElementById('nav-grounds').hidden=true;
+          document.getElementById('nav-videos').hidden=true;
+          document.getElementById('nav-images').hidden=true;
+          document.getElementById('nav-stats').hidden=true;
+          document.getElementById('nav-login').hidden=true;
+          document.getElementById('nav-home').hidden=true;
+
+          document.getElementById('a-home').addEventListener("click", myFunction)
+        function myFunction() {
+          var txt;
+          alert("You will be logged out!");
+        }
+    </script>
+
+
+    <script>
+        function autocomplete(inp, arr) {
+          /*the autocomplete function takes two arguments,
+          the text field element and an array of possible autocompleted values:*/
+          var currentFocus;
+          /*execute a function when someone writes in the text field:*/
+          inp.addEventListener("input", function(e) {
+              var a, b, i, val = this.value;
+              /*close any already open lists of autocompleted values*/
+              closeAllLists();
+              if (!val) { return false;}
+              currentFocus = -1;
+              /*create a DIV element that will contain the items (values):*/
+              a = document.createElement("DIV");
+              a.setAttribute("id", this.id + "autocomplete-list");
+              a.setAttribute("class", "autocomplete-items");
+              /*append the DIV element as a child of the autocomplete container:*/
+              this.parentNode.appendChild(a);
+              /*for each item in the array...*/
+              for (i = 0; i < arr.length; i++) {
+                /*check if the item starts with the same letters as the text field value:*/
+                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                  /*create a DIV element for each matching element:*/
+                  b = document.createElement("DIV");
+                  /*make the matching letters bold:*/
+                  b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                  b.innerHTML += arr[i].substr(val.length);
+                  /*insert a input field that will hold the current array item's value:*/
+                  b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                  /*execute a function when someone clicks on the item value (DIV element):*/
+                  b.addEventListener("click", function(e) {
+                      /*insert the value for the autocomplete text field:*/
+                      inp.value = this.getElementsByTagName("input")[0].value;
+                      /*close the list of autocompleted values,
+                      (or any other open lists of autocompleted values:*/
+                      closeAllLists();
+                  });
+                  a.appendChild(b);
+                }
+              }
+          });
+          /*execute a function presses a key on the keyboard:*/
+          inp.addEventListener("keydown", function(e) {
+              var x = document.getElementById(this.id + "autocomplete-list");
+              if (x) x = x.getElementsByTagName("div");
+              if (e.keyCode == 40) {
+                /*If the arrow DOWN key is pressed,
+                increase the currentFocus variable:*/
+                currentFocus++;
+                /*and and make the current item more visible:*/
+                addActive(x);
+              } else if (e.keyCode == 38) { //up
+                /*If the arrow UP key is pressed,
+                decrease the currentFocus variable:*/
+                currentFocus--;
+                /*and and make the current item more visible:*/
+                addActive(x);
+              } else if (e.keyCode == 13) {
+                /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                e.preventDefault();
+                if (currentFocus > -1) {
+                  /*and simulate a click on the "active" item:*/
+                  if (x) x[currentFocus].click();
+                }
+              }
+          });
+          function addActive(x) {
+            /*a function to classify an item as "active":*/
+            if (!x) return false;
+            /*start by removing the "active" class on all items:*/
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            /*add class "autocomplete-active":*/
+            x[currentFocus].classList.add("autocomplete-active");
+          }
+          function removeActive(x) {
+            /*a function to remove the "active" class from all autocomplete items:*/
+            for (var i = 0; i < x.length; i++) {
+              x[i].classList.remove("autocomplete-active");
+            }
+          }
+          function closeAllLists(elmnt) {
+            /*close all autocomplete lists in the document,
+            except the one passed as an argument:*/
+            var x = document.getElementsByClassName("autocomplete-items");
+            for (var i = 0; i < x.length; i++) {
+              if (elmnt != x[i] && elmnt != inp) {
+                x[i].parentNode.removeChild(x[i]);
+              }
+            }
+          }
+          /*execute a function when someone clicks in the document:*/
+          document.addEventListener("click", function (e) {
+              closeAllLists(e.target);
+          });
+        }
+
+        /*An array containing all the country names in the world:*/
+        var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua & Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia & Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre & Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts & Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad & Tobago","Tunisia","Turkey","Turkmenistan","Turks & Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
+
+        /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+        autocomplete(document.getElementById("father_name"), countries);
+    </script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+{% endblock %}

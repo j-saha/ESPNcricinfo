@@ -1,0 +1,66 @@
+{% extends 'homepage/base.html' %}
+      {% load static %}
+      {% block content %}
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'matchall/style.css' %}">
+</head>
+<body>
+<br><br><br><br><br>
+<h1><span class="blue" style="color:deepskyblue"><b>MATCH DETAILS</b></span><span class="blue"></span> <span class="yellow"></span></h1>
+{#<h2>Created with love by <a href="http://pablogarciafernandez.com" target="_blank">Pablo García Fernández</a></h2>#}
+
+<table class="containertable">
+	<thead>
+		<tr>
+            <th><h1 style="color:cornflowerblue">First Team</h1></th>
+            <th><h1 style="color:cornflowerblue">Second Team</h1></th>
+            <th><h1 style="color:cornflowerblue">Match Type</h1></th>
+            <th><h1 style="color:cornflowerblue">Series Name</h1></th>
+            <th><h1 style="color:cornflowerblue">Weather</h1></th>
+            <th><h1 style="color:cornflowerblue">Ground</h1></th>
+			<th><h1 style="color:cornflowerblue">Man of the Match</h1></th>
+			<th><h1 style="color:cornflowerblue">Winner</h1></th>
+		</tr>
+	</thead>
+	<tbody>
+    {% for r in results %}
+		<tr>
+            <td>{{ r.team1 }}</td>
+            <td>{{ r.team2 }}</td>
+            <td>{{ r.type }}</td>
+            <td>{{ r.series_name }}</td>
+            <td>{{ r.weather }}</td>
+            <td>{{ r.ground }}</td>
+            <td><a id="{{ r.motm }}" onclick="getplayer(id)">{{ r.motm }}</a></td>
+            <td>{{ r.winner }}</td>
+            <td><button class="btn-danger" onclick="viewSingleMatch('{{ r.match_id }}')">Scorecard</button></td>
+
+
+
+		</tr>
+    {% endfor %}
+
+	</tbody>
+</table>
+    <script>
+            function viewSingleMatch(match_id) {
+              window.location.href = "{% url 'matchsingle' %}" +"?id="+match_id;
+            }
+          function getplayer(ID) {
+            var txt = document.getElementById(ID).innerText;
+            window.location.href = "{% url 'playersingle' %}" +"?name="+txt;
+          }
+    </script>
+
+    <script>
+          document.getElementById('nav-about').hidden=true;
+          document.getElementById('nav-series').hidden=true;
+          document.getElementById('nav-teams').hidden=true;
+          document.getElementById('nav-contact').hidden=true;
+          document.getElementById('nav-grounds').hidden=true;
+          document.getElementById('nav-videos').hidden=true;
+          document.getElementById('nav-images').hidden=true;
+          document.getElementById('nav-stats').hidden=true;
+    </script>
+</body>
+{% endblock %}

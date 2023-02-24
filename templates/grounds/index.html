@@ -1,0 +1,140 @@
+{% extends 'homepage/base.html' %}
+      {% load static %}
+      {% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'grounds/css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'grounds/css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'grounds/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'grounds/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'grounds/css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'grounds/css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'grounds/css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'grounds/css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'grounds/css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'grounds/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'grounds/css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'grounds/css/style.css' %}">
+  </head>
+  <body>
+
+    <div class="KW_progressContainer">
+      <div class="KW_progressBar">
+
+      </div>
+    </div>
+    <div class="page">
+
+    
+    <div id="colorlib-page">
+
+
+      <section class="ftco-section">
+        <div class="container mt-5">
+          <div class="row justify-content-center mb-5 pb-5">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+              <span>GROUNDS</span>
+              <h2>Checkout a few of grounds</h2>
+            </div>
+          </div>
+          <div class="row no-gutters">
+              {% for r in results %}
+	          <div class="block-3 d-md-flex ftco-animate" data-scrollax-parent="true">
+                {% with 'grounds/images/'|add:r.image_link as image_path %}
+	            <a href="#" class="image d-flex justify-content-center align-items-center" style="background-image: url({% static image_path %}); " data-scrollax=" properties: { translateY: '-30%'}">
+{#                  <img ng-src="{% static image_path %}">#}
+	              <div class="icon d-flex text-center justify-content-center align-items-center">
+	                <span class="icon-search"></span>
+	              </div>
+	            </a>
+                  {% endwith %}
+	            <div class="text">
+	              <h4 class="subheading">{{ r.name }}</h4>
+                    <h2 class="heading"><a id="{{ r.name }}" onclick="getText(id)">{{ r.name  }}</a></h2>
+	              <p>CITY: {{ r.city }}     STREET NO : {{ r.street_no }}     ZIP CODE : {{ r.zip_code }}</p>
+                    <p>STREET NO : {{ r.street_no }}</p>
+                    <p>ZIP CODE : {{ r.zip_code }}</p>
+{#	              <p><a href="#">View Project</a></p>#}
+	            </div>
+	          </div>
+              {% endfor %}
+
+	        </div>
+	        <div class="row mt-5">
+	          <div class="col text-center">
+	            <div class="block-27">
+	              <ul>
+	                <li><a href="#">&lt;</a></li>
+	                <li class="active"><span>1</span></li>
+	                <li><a href="#">2</a></li>
+	                <li><a href="#">3</a></li>
+	                <li><a href="#">4</a></li>
+	                <li><a href="#">5</a></li>
+	                <li><a href="#">&gt;</a></li>
+	              </ul>
+	            </div>
+	          </div>
+	        </div>
+        </div>
+      </section>
+        
+
+      <!-- loader -->
+      <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+      </div>
+
+    </div>
+
+    <script>
+      function getText(ID) {
+        var txt = document.getElementById(ID).innerText;
+        window.location.href = "{% url 'groundsingle' %}" +"?name="+txt;
+      }
+    </script>
+
+    <script src="{% static 'grounds/js/jquery.min.js' %}"></script>
+    <script src="{% static 'grounds/js/jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'grounds/js/popper.min.js' %}"></script>
+    <script src="{% static 'grounds/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'grounds/js/jquery.easing.1.3.js' %}"></script>
+    <script src="{% static 'grounds/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'grounds/js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'grounds/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'grounds/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'grounds/js/aos.js' %}"></script>
+    <script src="{% static 'grounds/js/jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'grounds/js/scrollax.min.js' %}"></script>
+    <script src="{% static 'grounds/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'grounds/js/jquery.timepicker.min.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{% static 'grounds/js/google-map.js' %}"></script>
+    <script src="{% static 'grounds/js/main.js' %}"></script>
+  <script>
+          document.getElementById('nav-about').hidden=true;
+          document.getElementById('nav-series').hidden=true;
+          document.getElementById('nav-teams').hidden=true;
+          document.getElementById('nav-contact').hidden=true;
+          document.getElementById('nav-grounds').hidden=true;
+          document.getElementById('nav-videos').hidden=true;
+          document.getElementById('nav-images').hidden=true;
+          document.getElementById('nav-stats').hidden=true;
+    </script>
+    
+  </body>
+</html>
+{% endblock %}

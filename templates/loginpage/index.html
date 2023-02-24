@@ -1,0 +1,117 @@
+{% extends 'homepage/base.html' %}
+      {% load static %}
+      {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'loginpage/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'loginpage/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'loginpage/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'loginpage/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'loginpage/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'loginpage/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'loginpage/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'loginpage/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100" style="background-color:lightcoral;">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="{% static 'loginpage/images/img-01.png' %}" alt="IMG">
+				</div>
+
+				<form method="POST" class="login100-form validate-form">
+                    {% csrf_token %}
+					<span class="login100-form-title">
+						Admin Login
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" type="text" name="name" placeholder="Username" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100" type="password" name="password" placeholder="Password" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type="submit">
+                            Login
+						</button>
+					</div>
+
+					<div class="text-center p-t-12">
+						<h3 style="color: red">
+							{{ error }}
+						</h3>
+						<a class="txt2" href="#">
+{#							{{ error }}#}
+						</a>
+					</div>
+
+					<div class="text-center p-t-136">
+                        <button class="login100-form-btn">
+						<a class="txt2" href="{% url 'signup' %}">
+							Create your Account
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+                        </button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<!--===============================================================================================-->
+	<script src="{% static 'loginpage/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'loginpage/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'loginpage/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'loginpage/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'loginpage/vendor/tilt/tilt.jquery.min.js' %}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'loginpage/js/main.js' %}"></script>
+    <script>
+          document.getElementById('nav-about').hidden=true;
+          document.getElementById('nav-series').hidden=true;
+          document.getElementById('nav-teams').hidden=true;
+          document.getElementById('nav-contact').hidden=true;
+          document.getElementById('nav-grounds').hidden=true;
+          document.getElementById('nav-videos').hidden=true;
+          document.getElementById('nav-images').hidden=true;
+          document.getElementById('nav-stats').hidden=true;
+    </script>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'homepage/base.html' %}
+      {% load static %}
+      {% block content %}
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'seriesall/style.css' %}">
+</head>
+<body>
+<h1><span class="blue">&lt;</span><span class="blue">&gt;</span> <span class="yellow"></span></h1>
+{#<h2>Created with love by <a href="http://pablogarciafernandez.com" target="_blank">Pablo García Fernández</a></h2>#}
+
+<table class="containertable">
+	<thead>
+		<tr>
+			<th><h1>Series Name</h1></th>
+			<th><h1>Host Country</h1></th>
+			<th><h1>Man of the series</h1></th>
+			<th><h1>Winner</h1></th>
+		</tr>
+	</thead>
+	<tbody>
+    {% for r in results %}
+		<tr>
+            <td><a id="{{ r.id }}" onclick="getText(id)">{{ r.name }}</a></td>
+			<td>{{ r.host }}</td>
+{#			<td>{{ r.motm }}</td>#}
+            <td><a id="{{ r.motm }}" onclick="getplayer(id)">{{ r.motm }}</a></td>
+			<td>{{ r.winner }}</td>
+		</tr>
+    {% endfor %}
+
+	</tbody>
+</table>
+
+    <script>
+          function getText(ID) {
+            var txt = document.getElementById(ID).innerText;
+            window.location.href = "{% url 'series_details' %}" +"?name="+txt;
+          }
+          function getplayer(ID) {
+            var txt = document.getElementById(ID).innerText;
+            window.location.href = "{% url 'playersingle' %}" +"?name="+txt;
+          }
+    </script>
+
+    <script>
+          document.getElementById('nav-about').hidden=true;
+          document.getElementById('nav-series').hidden=true;
+          document.getElementById('nav-teams').hidden=true;
+          document.getElementById('nav-contact').hidden=true;
+          document.getElementById('nav-grounds').hidden=true;
+          document.getElementById('nav-videos').hidden=true;
+          document.getElementById('nav-images').hidden=true;
+          document.getElementById('nav-stats').hidden=true;
+    </script>
+</body>
+{% endblock %}

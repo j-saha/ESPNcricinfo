@@ -1,0 +1,211 @@
+{% extends 'homepage/base.html' %}
+      {% load static %}
+      {% block content %}
+{#<!DOCTYPE HTML>#}
+{##}
+{#<html>#}
+{#	<head>#}
+{#		<meta charset="utf-8" />#}
+{#		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />#}
+          <head>
+          <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <link rel=”stylesheet” href=”{% static 'adminpage/assets/css/sweetalert.css' %}”>
+		<link rel="stylesheet" href="{% static 'adminpage/assets/css/main.css' %}" />
+          </head>
+{#	</head>#}
+{#	<body class="is-preload">#}
+
+		<!-- Header -->
+			<div id="header">
+
+				<div class="top">
+
+					<!-- Logo -->
+						<div id="logo">
+                            <a onclick="myFunction()"> <img src="{% static 'homepage/img/logo3.png' %}" alt="ESPNCRICINFO" height="50" width="150"></a>
+                            <p><a onclick="myFunction()">HOME</a> </p>
+{#							<span class="image avatar48"><img src="{% static 'adminpage/images/avatar.jpg' %}" alt="" /></span>#}
+							<h1 id="title">{{name}}</h1>
+							<p>ADMIN</p>
+						</div>
+
+				</div>
+
+				<div class="bottom">
+                    <a onclick="myFunction()"><button> LOG OUT</button></a>
+					<!-- Social Icons -->
+{#						<ul class="icons">#}
+{#							<li><a href="{% url 'home' %}"> <img src="{% static 'homepage/img/logo3.png' %}" alt="ESPNCRICINFO" height="50" width="150"></a></li>#}
+{##}
+{#						</ul>#}
+{#                        <ul class="icons">#}
+{#                        <li><a href="{% url 'home' %}" >HOME</a></li>#}
+{#                        </ul>#}
+
+				</div>
+
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Intro -->
+{#					<section id="top" class="one dark cover">#}
+{#						<div class="container">#}
+{##}
+{#							<header>#}
+{#								<h2 class="alt">Hi!  <strong>SAEM HASAN</strong></h2>#}
+{#								<p>Ligula scelerisque justo sem accumsan diam quis<br />#}
+{#								vitae natoque dictum sollicitudin elementum.</p>#}
+{#							</header>#}
+{##}
+{#							<footer>#}
+{#								<a href="#portfolio" class="button scrolly">ADD DATA</a>#}
+{#							</footer>#}
+{##}
+{#						</div>#}
+{#					</section>#}
+
+				<!-- Portfolio -->
+					<section id="portfolio" class="two">
+						<div class="container">
+
+							<header>
+								<h2>ADD DATA</h2>
+							</header>
+
+{#							<p>Vitae natoque dictum etiam semper magnis enim feugiat convallis convallis#}
+{#							egestas rhoncus ridiculus in quis risus amet curabitur tempor orci penatibus.#}
+{#							Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis#}
+{#							fusce hendrerit lacus ridiculus.</p>#}
+
+							<div class="row">
+								<div class="col-4 col-12-mobile">
+									<article class="item">
+										<a href="{% url 'addplayer' %}" class="image fit"><img src="{% static 'adminpage/images/player.jpg' %}" alt="" /></a>
+										<header>
+                                            <a href="{% url 'addplayer' %}"> <h2>Player</h2></a>
+										</header>
+									</article>
+									<article class="item">
+										<a href="{% url 'addground' %}" class="image fit"><img src="{% static 'adminpage/images/ground.jpg' %}" alt="" /></a>
+										<header>
+                                            <a href="{% url 'addground' %}"><h2>GROUND</h2></a>
+										</header>
+									</article>
+								</div>
+								<div class="col-4 col-12-mobile">
+									<article class="item">
+										<a href="{% url 'addteam' %}" class="image fit"><img src="{% static 'adminpage/images/team.jpg' %}" alt="" /></a>
+										<header>
+                                            <a href="{% url 'addteam' %}"><h2>TEAM</h2></a>
+										</header>
+									</article>
+                                    <article class="item">
+										<a href="{% url 'addmatch' %}" class="image fit"><img src="{% static 'adminpage/images/match.jpg' %}" alt="" /></a>
+										<header>
+                                            <a href="{% url 'addmatch' %}"><h2>MATCH</h2></a>
+										</header>
+									</article>
+								</div>
+								<div class="col-4 col-12-mobile">
+                                    <article class="item">
+										<a href="{% url 'addseries' %}" class="image fit"><img src="{% static 'adminpage/images/series.jpg' %}" alt="" /></a>
+										<header>
+                                            <a href="{% url 'addseries' %}"><h2>SERIES</h2></a>
+										</header>
+									</article>
+                                    <article class="item">
+										<a href="{% url 'addumpire' %}" class="image fit"><img src="{% static 'adminpage/images/umpire.jpg' %}" alt="" /></a>
+										<header>
+                                            <a href="{% url 'addumpire' %}"><h2>UMPIRE</h2></a>
+										</header>
+									</article>
+								</div>
+							</div>
+
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'adminpage/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'adminpage/assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'adminpage/assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'adminpage/assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'adminpage/assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'adminpage/assets/js/util.js' %}"></script>
+			<script src="{% static 'adminpage/assets/js/main.js' %}"></script>
+    <script>
+          document.getElementById('nav-about').hidden=true;
+          document.getElementById('nav-series').hidden=true;
+          document.getElementById('nav-teams').hidden=true;
+          document.getElementById('nav-contact').hidden=true;
+          document.getElementById('nav-grounds').hidden=true;
+          document.getElementById('nav-videos').hidden=true;
+          document.getElementById('nav-images').hidden=true;
+          document.getElementById('nav-stats').hidden=true;
+    </script>
+
+    <script>
+        function myFunction() {
+          var txt;
+          var r = confirm("You will be logged out!");
+          if (r == true) {
+            {#txt = "You pressed OK!";#}
+              window.location.href = "{% url 'home' %}";
+          } else {
+            {#txt = "You pressed Cancel!";#}
+              alert('you will stay in the admin page')
+          }
+        }
+    </script>
+
+<script type="text/javascript">
+
+function JSconfirm(){
+
+        swal({
+
+        title: "Redirect to main page!",
+
+        text: "Redirect me to home page?",
+
+        type: "warning",
+
+        showCancelButton: true,
+
+        confirmButtonColor: "#DD6B55",
+
+        confirmButtonText: "Yes",
+
+        cancelButtonText: "No",
+
+        closeOnConfirm: false,
+
+        closeOnCancel: false },
+
+        function(isConfirm){
+
+        if (isConfirm)
+
+        {
+
+       window.location.href = "{% url 'home' %}";
+
+        }
+
+        else {
+
+        swal("You are not redirect!", "success");
+
+        } });
+
+        }
+
+</script>
+{#	</body>#}
+{#</html>#}
+{% endblock %}

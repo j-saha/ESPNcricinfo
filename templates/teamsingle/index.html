@@ -1,0 +1,189 @@
+{% extends 'homepage/base.html' %}
+      {% load static %}
+      {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'teamsingle/css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'teamsingle/css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'teamsingle/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'teamsingle/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'teamsingle/css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'teamsingle/css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'teamsingle/css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'teamsingle/css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'teamsingle/css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'teamsingle/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'teamsingle/css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'teamsingle/css/style.css' %}">
+  </head>
+  <body>
+
+    <div class="KW_progressContainer">
+      <div class="KW_progressBar">
+
+      </div>
+    </div>
+    <div class="page">
+
+    
+    <div id="colorlib-page">
+
+      <section class="ftco-section about-section">
+        <div class="container">
+          <div class="row d-flex my-5" data-scrollax-parent="true">
+              {% with 'homepage/img/speakers/'|add:image_id as image_path %}
+            <div class="col-md-2" style="background-image: url('{% static image_path %}');background-size: cover;"></div>
+              {% endwith %}
+            <div class="col-md-2"></div>
+            <div class="col-md-6 wrap ftco-animate">
+              <div class="about-desc">
+                <h1 class="bold-text">TEAM</h1>
+                <div class="p-5">
+                    <h2 style="color:orangered" class="mb-5"><b>{{ name }}</b></h2>
+                  <p></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-end mt-5">
+          	<div class="col-md-10">
+          		<div class="profile ftco-animate">
+	          		<h2 style="color:deepskyblue" class="mb-4">Details about this Team</h2>
+                        <h5>Total Win: {{ team_stat.total_win }}</h5>
+                        <h5>Total Lose: {{ team_stat.total_lose }}</h5>
+                        <h5>Not Played: {{ team_stat.not_played }}</h5>
+                         <h5>Team Rating: {{ rate }}</h5>
+	          		<div class="row my-5">
+		          		<div class="col-md-6">
+                            <h4 style="color:deepskyblue" class="mb-4">Coaches of this team: </h4>
+                                {% for r in coach %}
+                                <tr>
+                                    <td><h5>{{ r.fullname }}</h5> From <h5>{{ r.start_date }}</h5></td><br>
+                                </tr>
+                                {% endfor %}
+		          		</div>
+
+	          		</div>
+                    <table class="containertable">
+        <thead>
+            <tr>
+                <h4 style="color:deepskyblue" class="mb-4">Winning matches of this team: </h4>
+                {% if details|length %}
+                    {% for r in details %}
+                    <tr>
+
+                        <td><h5>{{ r.team1_name }}&nbsp;&nbsp;&nbsp;&nbsp;</h5></td>
+                        <td><h6>VS&nbsp;&nbsp;&nbsp;&nbsp; </h6></td>
+                        <td><h5>{{ r.team2_name }}&nbsp;&nbsp;&nbsp;&nbsp;</h5></td>
+                        <td><h5> ON {{ r.match_date }}&nbsp;&nbsp;&nbsp;&nbsp;</h5></td>
+                        <td><button class="btn-danger" onclick="viewWinMatchTeam('{{ r.match_id }}')">Scorecard</button></td>
+
+                    </tr>
+                {% endfor %}
+                {% else %}
+                    <th><h5 style="color:deepskyblue">No match won by this team.</h5></th>
+
+                {% endif %}
+
+            </tr>
+        </thead>
+
+</table>
+                <br><br>
+                {% if best.fullname is not None %}
+                <h5>Best Batsman of {{name}}: <a style="color:lightgreen;" id="{{ best.fullname }}" onclick="getthisplayer(id)">{{ best.fullname }}</a></h5>
+                {% else %}
+                    <h5>Best Batsman of {{name}}: No Batsman added in this team.</h5>
+                {% endif %}
+                <br>
+                {% if best2.fullname is not None %}
+                <h5>Best Bowler of {{ name }}: <a style="color:lightgreen;" id="{{ best2.fullname }}" onclick="getthisplayer(id)">{{ best2.fullname }}</a></h5>
+                                {% else %}
+                    <h5>Best Bowler of {{ name }}: No Bowler added in this team.</h5>
+                {% endif %}
+                <br>
+                {% if best2.fullname is not None %}
+                <h5>Best Allrounder of {{ name }}: <a  style="color:lightgreen;" id="{{ best3.fullname }}" onclick="getthisplayer(id)">{{ best3.fullname }}</a></h5>
+                                                {% else %}
+                    <h5>Best Allrounder of {{ name }}: No Allrounder added in this team.</h5>
+                {% endif %}
+                <br>
+
+                <h5><a style="color:darkorange;" id="{{name}}" onclick="getAllPlayers(id)">CLICK TO SEE ALL PLAYERS OF THIS TEAM</a></h5>
+          		</div>
+          	</div>
+          </div>
+        </div>
+      </section>
+      
+
+
+      <!-- loader -->
+      <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+      </div>
+
+    </div>
+        <script>
+            function viewWinMatchTeam(match_id) {
+              window.location.href = "{% url 'matchsingle' %}" +"?id="+match_id;
+            }
+
+    </script>
+    <script>
+          function getAllPlayers(ID) {
+            var txt = document.getElementById(ID).id;
+            window.location.href = "{% url 'playerofateam' %}" +"?team="+txt;
+          }
+    </script>
+
+    <script src="{% static 'teamsingle/js/jquery.min.js' %}"></script>
+    <script src="{% static 'teamsingle/js/jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'teamsingle/js/popper.min.js' %}"></script>
+    <script src="{% static 'teamsingle/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'teamsingle/js/jquery.easing.1.3.js' %}"></script>
+    <script src="{% static 'teamsingle/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'teamsingle/js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'teamsingle/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'teamsingle/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'teamsingle/js/aos.js' %}"></script>
+    <script src="{% static 'teamsingle/js/jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'teamsingle/js/scrollax.min.js' %}"></script>
+    <script src="{% static 'teamsingle/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'teamsingle/js/jquery.timepicker.min.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{% static 'teamsingle/js/google-map.js' %}"></script>
+    <script src="{% static 'teamsingle/js/main.js' %}"></script>
+  <script>
+          document.getElementById('nav-about').hidden=true;
+          document.getElementById('nav-series').hidden=true;
+          document.getElementById('nav-teams').hidden=true;
+          document.getElementById('nav-contact').hidden=true;
+          document.getElementById('nav-grounds').hidden=true;
+          document.getElementById('nav-videos').hidden=true;
+          document.getElementById('nav-images').hidden=true;
+          document.getElementById('nav-stats').hidden=true;
+    </script>
+      <script>
+          function getthisplayer(ID) {
+            var txt = document.getElementById(ID).innerText;
+            window.location.href = "{% url 'playersingle' %}" +"?name="+txt;
+          }
+    </script>
+    
+  </body>
+</html>
+{% endblock %}

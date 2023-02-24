@@ -1,0 +1,272 @@
+{#{% extends 'homepage/base.html' %}#}
+      {% load static %}
+{#      {% block content %}#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ESPNCRICINFO</title>
+    <link href="{% static 'homepage/img/logo1.jpg' %}" rel="icon">
+    <link href="{% static 'homepage/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'addplayer/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+    <link rel="stylesheet" href="{% static 'addplayer/vendor/nouislider/nouislider.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'addplayer/css/style.css' %}">
+</head>
+<body>
+
+    <div class="main">
+
+        <div class="container">
+
+            <div class="signup-content">
+                <div class="signup-img">
+                    <div>
+                        <br>
+                        <a href="{% url 'adminpage' %}"> <button type="button" class="btn btn-primary btn-lg" onclick="{% url 'adminpage' %}">ADMIN PAGE</button></a>
+                    </div>
+
+                    <img src="{% static 'addmatch/images/addmatch.jpg' %}" alt="">
+
+
+                </div>
+
+                <div>
+                        <br>
+                    <center><h2>ENTER MATCH INFO </h2></center>
+{#                        <p>while seats are available !</p>#}
+                </div>
+
+                <div class="signup-form">
+                    <form method="POST" class="register-form" id="register-form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group">
+                                <div class="form-input">
+                                    <label for="team1_opp" class="required">Select First Team</label>
+                                    <input list="team1_opp" name="team1" id="team1" required/>
+                                    <datalist id="team1_opp">
+                                        {% for t in team %}
+                                            <option>{{ t.team_name }}</option>
+                                        {% endfor %}
+                                    </datalist>
+                                </div>
+                                <div class="form-input">
+                                    <label for="team2_opp" class="required">Select Second Team</label>
+                                    <input list="team2_opp" name="team2" id="team2" required/>
+                                    <datalist id="team2_opp">
+                                        {% for t in team %}
+                                            <option>{{ t.team_name }}</option>
+                                        {% endfor %}
+                                    </datalist>
+                                </div>
+                                <div class="form-input">
+                                    <label for="series_name_in" class="required">Select Series</label>
+                                    <input list="series_name_in" name="s_name_in" id="s_name_in" required/>
+                                    <datalist id="series_name_in">
+                                        {% for s in series %}
+                                            <option>{{ s.series_name }}</option>
+                                        {% endfor %}
+
+
+                                    </datalist>
+                                </div>
+                                <div class="form-input">
+                                    <label for="ground_add_opp" class="required">Select Ground</label>
+                                    <input list="ground_add_opp" name="in_ground" id="in_ground" required/>
+                                    <datalist id="ground_add_opp">
+                                        {% for g in ground %}
+                                            <option>{{ g.ground_name }}</option>
+                                        {% endfor %}
+
+
+                                    </datalist>
+                                </div>
+                                <div class="form-radio">
+                                <label for="match_type" class="radio-label">Match Type</label>
+                                <div class="form-radio-item">
+                                    <input type="radio" name="match_type_ODI" id="ODI">
+                                    <label for="ODI">ODI</label>
+                                    <span class="check"></span>
+                                </div>
+                                <div class="form-radio-item">
+                                    <input type="radio" name="match_type_TEST" id="TEST">
+                                    <label for="TEST">TEST</label>
+                                    <span class="check"></span>
+                                </div>
+                                <div class="form-radio-item">
+                                <input type="radio" name="match_type_T20" id="T20">
+                                <label for="T20">T20</label>
+                                <span class="check"></span>
+                                </div>
+                                 </div>
+                                <div class="form-input">
+                                    <label for="weather" class="required">Weather</label>
+                                    <input type="text" name="weather" id="weather" />
+                                </div>
+                                <div class="form-input">
+                                    <label for="win_opp">Winning Team</label>
+                                    <input list="win_opp" name="winner" id="winner"/>
+                                    <datalist id="win_opp">
+                                        {% for t in team %}
+                                            <option>{{ t.team_name }}</option>
+                                        {% endfor %}
+                                    </datalist>
+                                </div>
+                                <div class="form-input">
+                                    <label for="motm_lbl">Man of the Match</label>
+                                    <input list="motm_lbl" name="motm" id="motm"/>
+                                    <datalist id="motm_lbl">
+                                        {% for p in player %}
+                                            <option>{{ p.fullname }}</option>
+                                        {% endfor %}
+
+
+                                    </datalist>
+                                </div>
+                                <div class="form-input">
+                                    <label for="ump_1">Select Umpire 1 </label>
+                                    <input list="ump_1" name="ump1" id="ump1"/>
+                                    <datalist id="ump_1">
+                                        {% for u in umpire %}
+                                            <option>{{ u.fullname }}</option>
+                                        {% endfor %}
+
+
+                                    </datalist>
+                                </div>
+                                <div class="form-input">
+                                    <label for="ump_2">Select Umpire 2 </label>
+                                    <input list="ump_2" name="ump2" id="ump2"/>
+                                    <datalist id="ump_2">
+                                        {% for u in umpire %}
+                                            <option>{{ u.fullname }}</option>
+                                        {% endfor %}
+
+
+                                    </datalist>
+                                </div>
+                                <div class="form-input">
+                                    <label for="ump_3">Select Umpire 3 </label>
+                                    <input list="ump_3" name="ump3" id="ump3"/>
+                                    <datalist id="ump_3">
+                                        {% for u in umpire %}
+                                            <option>{{ u.fullname }}</option>
+                                        {% endfor %}
+
+                                    </datalist>
+                                </div>
+                                <div class="form-input">
+                                    <label for="match_date" class="required">MATCH_DATE</label>
+                                    <input type="date" name="match_date" id="match_date" placeholder="DD-MON-YYYY"/>
+                               </div>
+                                <div class="form-input">
+                                    <label for="player_score" class="required">PLAYER SCORE</label>
+                                    <input type="file" name="player_score" id="player_score" required/>
+                                </div>
+{#                                <div class="form-input">#}
+{#						            <label for="date" class="required">DATE</label>#}
+{#						            <input type="text" name="date" class="date" id="date" placeholder="DD-MON-YYYY">#}
+{#                                </div>#}
+
+
+
+
+                            </div>
+                            <!--<div class="form-group">
+                                <div class="form-select">
+                                    <div class="label-flex">
+                                        <label for="meal_preference">meal preference</label>
+                                        <a href="#" class="form-link">Lunch detail</a>
+                                    </div>
+                                    <div class="select-list">
+                                        <select name="meal_preference" id="meal_preference">
+                                            <option value="Vegetarian">Vegetarian</option>
+                                            <option value="Kosher">Kosher</option>
+                                            <option value="Asian Vegetarian">Asian Vegetarian</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-radio">
+                                    <div class="label-flex">
+                                        <label for="payment">Payment Mode</label>
+                                        <a href="#" class="form-link">Payment Detail</a>
+                                    </div>
+                                    <div class="form-radio-group">            
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="payment" id="cash" checked>
+                                            <label for="cash">Cash</label>
+                                            <span class="check"></span>
+                                        </div>
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="payment" id="cheque">
+                                            <label for="cheque">Cheque</label>
+                                            <span class="check"></span>
+                                        </div>
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="payment" id="demand">
+                                            <label for="demand">Demand Draf</label>
+                                            <span class="check"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-input">
+                                    <label for="chequeno">DD / Cheque No.</label>
+                                    <input type="text" name="chequeno" id="chequeno" />
+                                </div>
+                                <div class="form-input">
+                                    <label for="blank_name">Drawn on ( Bank Name)</label>
+                                    <input type="text" name="blank_name" id="blank_name" />
+                                </div>
+                                <div class="form-input">
+                                    <label for="payable">Payable at</label>
+                                    <input type="text" name="payable" id="payable" />
+                                </div>
+                            </div>-->
+                        </div>
+{#                        <div class="donate-us">#}
+{#                            <label>Donate us</label>#}
+{#                            <div class="price_slider ui-slider ui-slider-horizontal">#}
+{#                                <div id="slider-margin"></div>#}
+{#                                <span class="donate-value" id="value-lower"></span>#}
+{#                            </div>#}
+{#                        </div>#}
+                        <div class="form-submit">
+                            <input type="submit" value="Submit" class="submit" id="submit" name="submit" />
+                            <input type="submit" value="Reset" class="submit" id="reset" name="reset" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'addplayer/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'addplayer/vendor/nouislider/nouislider.min.js' %}"></script>
+    <script src="{% static 'addplayer/vendor/wnumb/wNumb.js' %}"></script>
+    <script src="{% static 'addplayer/vendor/jquery-validation/dist/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'addplayer/vendor/jquery-validation/dist/additional-methods.min.js' %}"></script>
+    <script src="{% static 'addplayer/js/main.js' %}"></script>
+    <script>
+          document.getElementById('nav-about').hidden=true;
+          document.getElementById('nav-series').hidden=true;
+          document.getElementById('nav-teams').hidden=true;
+          document.getElementById('nav-contact').hidden=true;
+          document.getElementById('nav-grounds').hidden=true;
+          document.getElementById('nav-videos').hidden=true;
+          document.getElementById('nav-images').hidden=true;
+          document.getElementById('nav-stats').hidden=true;
+          document.getElementById('nav-login').hidden=true;
+          document.getElementById('nav-home').hidden=true;
+    </script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+
+{#{% endblock %}#}

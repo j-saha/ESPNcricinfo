@@ -1,0 +1,253 @@
+{% extends 'homepage/base.html' %}
+      {% load static %}
+      {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'matchsingle/css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'matchsingle/css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'matchsingle/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'matchsingle/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'matchsingle/css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'matchsingle/css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'matchsingle/css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'matchsingle/css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'matchsingle/css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'matchsingle/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'matchsingle/css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'matchsingle/css/style.css' %}">
+  </head>
+  <body>
+
+    <div class="KW_progressContainer">
+      <div class="KW_progressBar">
+
+      </div>
+    </div>
+    <div class="page">
+
+    
+    <div id="colorlib-page">
+
+      <section class="ftco-section about-section">
+        <div class="container">
+            <h1>Match Date: {{ others.m_date }}</h1>
+            <center><h1 style="color:deepskyblue">SCORECARD</h1></center>
+        <h1 style="color:lawngreen">First Innings</h1>
+            <th><h2>Batting: {% for t in teams %} {{ t.team1 }} {% endfor %}</h2></th>
+
+
+            <table class="containertable" border="2">
+        <thead>
+            <tr>
+                <th><h1>Batsman</h1></th>
+                <th><h1>Score</h1></th>
+                <th><h1>Balls Batted</h1></th>
+                <th><h1>Fours</h1></th>
+                <th><h1>Sixes</h1></th>
+                <th><h1>Strike Rate</h1></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in team1_bat %}
+            <tr>
+
+
+                {% if r.balls_batted != None %}
+                    <td><a id="{{ r.player_name }}" onclick="getplayer(id)"> {{ r.player_name }}</a></td>
+                    <td>{{ r.scored_run }}</td>
+                    <td>{{ r.balls_batted }}</td>
+                    <td>{{ r.fours }}</td>
+                    <td>{{ r.sixes }}</td>
+                    <td>{{ r.strike_rate }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+            {% for r in team1_bat %}
+            <tr>
+
+
+                {% if r.balls_batted == None %}
+                    <td><a id="{{ r.player_name }}" onclick="getplayer(id)"> {{ r.player_name }}</a></td>
+                    <td>NOT BATTED</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+
+        </tbody>
+
+</table>
+        <h4>Total: {{ others.team1_total }}</h4>
+        <br><br>
+        <th><h2>Bowling: {% for t in teams %} {{ t.team2 }} {% endfor %}</h2></th>
+
+
+            <table class="containertable" border="2">
+        <thead>
+            <tr>
+                <th><h1>Bowler</h1></th>
+                <th><h1>Overs</h1></th>
+                <th><h1>Given Run</h1></th>
+                <th><h1>Wickets</h1></th>
+                <th><h1>Economy</h1></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in team2_bowl %}
+            <tr>
+                <td><a id="{{ r.player_name }}" onclick="getplayer(id)"> {{ r.player_name }}</a></td>
+                {% if r.balls_bowled != None %}
+                    <td>{{ r.balls_bowled }}</td>
+                    <td>{{ r.given_runs }}</td>
+                    <td>{{ r.wickets }}</td>
+                    <td>{{ r.economy }}</td>
+                {% endif %}
+
+            </tr>
+        {% endfor %}
+
+        </tbody>
+</table>
+        <br><br><br>
+        <h1 style="color:lawngreen">Second Innings</h1>
+            <th><h2>Batting: {% for t in teams %} {{ t.team2 }} {% endfor %}</h2></th>
+
+
+            <table class="containertable" border="2">
+        <thead>
+            <tr>
+                <th><h1>Batsman</h1></th>
+                <th><h1>Score</h1></th>
+                <th><h1>Balls Batted</h1></th>
+                <th><h1>Fours</h1></th>
+                <th><h1>Sixes</h1></th>
+                <th><h1>Strike Rate</h1></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in team2_bat %}
+            <tr>
+                {% if r.balls_batted != None %}
+                    <td><a id="{{ r.player_name }}" onclick="getplayer(id)"> {{ r.player_name }}</a></td>
+                    <td>{{ r.scored_run }}</td>
+                    <td>{{ r.balls_batted }}</td>
+                    <td>{{ r.fours }}</td>
+                    <td>{{ r.sixes }}</td>
+                    <td>{{ r.strike_rate }}</td>
+                {% endif %}
+
+            </tr>
+        {% endfor %}
+                    {% for r in team2_bat %}
+            <tr>
+                {% if r.balls_batted == None %}
+                    <td><a id="{{ r.player_name }}" onclick="getplayer(id)"> {{ r.player_name }}</a></td>
+                    <td>Not Batted</td>
+                {% endif %}
+
+            </tr>
+        {% endfor %}
+
+        </tbody>
+</table>
+
+        <h4>Total: {{ others.team2_total }}</h4>
+        <br><br>
+            <th><h2>Bowling: {% for t in teams %} {{ t.team1 }} {% endfor %}</h2></th>
+
+
+            <table class="containertable" border="2">
+        <thead>
+            <tr>
+                <th><h1>Bowler</h1></th>
+                <th><h1>Overs</h1></th>
+                <th><h1>Given Run</h1></th>
+                <th><h1>Wickets</h1></th>
+                <th><h1>Economy</h1></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in team1_bowl %}
+            <tr>
+                <td><a id="{{ r.player_name }}" onclick="getplayer(id)"> {{ r.player_name }}</a></td>
+                {% if r.balls_bowled != None %}
+                    <td>{{ r.balls_bowled }}</td>
+                    <td>{{ r.given_runs }}</td>
+                    <td>{{ r.wickets }}</td>
+                    <td>{{ r.economy }}</td>
+                {% endif %}
+
+            </tr>
+        {% endfor %}
+
+        </tbody>
+</table>
+        <br>
+            <h2 style="color:deepskyblue">Winner: <span style="color:white">{{ others.match_winner }}</span></h2>
+        <br><br>
+        <h1 style="color:deepskyblue">Umpires: </h1>
+        {% for t in umpire %}<h2>{{ t.umpire_name }}</h2>{% endfor %}
+
+
+        </div>
+      </section>
+
+
+
+      <!-- loader -->
+      <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+      </div>
+
+    </div>
+
+
+    <script src="{% static 'matchsingle/js/jquery.min.js' %}"></script>
+    <script src="{% static 'matchsingle/js/jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'matchsingle/js/popper.min.js' %}"></script>
+    <script src="{% static 'matchsingle/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'matchsingle/js/jquery.easing.1.3.js' %}"></script>
+    <script src="{% static 'matchsingle/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'matchsingle/js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'matchsingle/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'matchsingle/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'matchsingle/js/aos.js' %}"></script>
+    <script src="{% static 'matchsingle/js/jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'matchsingle/js/scrollax.min.js' %}"></script>
+    <script src="{% static 'matchsingle/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'matchsingle/js/jquery.timepicker.min.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{% static 'matchsingle/js/google-map.js' %}"></script>
+    <script src="{% static 'matchsingle/js/main.js' %}"></script>
+  <script>
+          document.getElementById('nav-about').hidden=true;
+          document.getElementById('nav-series').hidden=true;
+          document.getElementById('nav-teams').hidden=true;
+          document.getElementById('nav-contact').hidden=true;
+          document.getElementById('nav-grounds').hidden=true;
+          document.getElementById('nav-videos').hidden=true;
+          document.getElementById('nav-images').hidden=true;
+          document.getElementById('nav-stats').hidden=true;
+    </script>
+  <script>
+          function getplayer(ID) {
+            var txt = document.getElementById(ID).innerText;
+            window.location.href = "{% url 'playersingle' %}" +"?name="+txt;
+          }
+    </script>
+    
+  </body>
+</html>
+{% endblock %}

@@ -1,0 +1,256 @@
+{% extends 'homepage/base.html' %}
+      {% load static %}
+      {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'playersingle/css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'playersingle/css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'playersingle/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'playersingle/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'playersingle/css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'playersingle/css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'playersingle/css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'playersingle/css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'playersingle/css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'playersingle/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'playersingle/css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'playersingle/css/style.css' %}">
+  </head>
+  <body>
+
+    <div class="KW_progressContainer">
+      <div class="KW_progressBar">
+
+      </div>
+    </div>
+    <div class="page">
+
+    
+    <div id="colorlib-page">
+
+      <section class="ftco-section about-section">
+        <div class="container">
+          <div class="row d-flex my-5" data-scrollax-parent="true">
+{#              {% with 'playersingle/images/'|add:details.image_link as image_path %}#}
+{#            <div class="col-md-4 author-img" style="background-image: url('{% static image_path %}');" data-scrollax=" properties: { translateY: '-70%'}"></div>#}
+{#              {% endwith %}#}
+            <div class="col-md-2"></div>
+            <div class="col-md-6 wrap ftco-animate">
+              <div class="about-desc">
+                <h1 class="bold-text">RECORDS</h1>
+                <div class="p-5">
+                 <!-- <h2 class="mb-5">NAME: {{ name }}</h2>
+                    <p>First Name: {{ details.first_name }}</p>
+                    <p>Last Name: {{ details.last_name }} </p>
+                    <p>Date of Birth: {{ details.date_of_birth }}</p>
+                    <p>Nationality: {{ details.nationality }}</p>-->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-end mt-5">
+          	<div class="col-md-10">
+          		<div class="profile ftco-animate">
+	          		<h2 class="mb-4">Maximum Runs in a match by a Player</h2>
+{#	          		<h4 class="mb-4">{{ name }} is a {{ details.role }}</h4>#}
+{#	          		<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>#}
+	          		{% for player in highestRunByAplayerMatch %}
+                    <div class="row my-5">
+		          		<div class="col-md-6">
+		          			<p><strong>Name:</strong> <a id="{{ player.name }}" onclick="getplayer(id)">{{ player.name }}</a></p>
+		          			<p><strong>Match:</strong> <span>{{ player.team1 }} vs {{ player.team2 }}</span></p>
+		          			<p><strong>Match Date:</strong> <span>{{ player.date }}</span></p>
+                            <p><strong>Scored Run:</strong> <span>{{ player.run }}</span></p>
+                            <p><strong>Balls Batted:</strong> <span>{{ player.balls }}</span></p>
+                            <p><strong>Fours:</strong> <span>{{ player.fours }}</span></p>
+                            <p><strong>Sixes:</strong> <span>{{ player.sixes }}</span></p>
+		          		</div>
+	          		</div>
+                    {% endfor %}
+          		</div>
+
+
+                <div class="profile ftco-animate">
+	          		<h2 class="mb-4">Maximum Wickets in a match by a player</h2>
+{#	          		<h4 class="mb-4">{{ name }} is a {{ details.role }}</h4>#}
+{#	          		<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>#}
+	          		{% for player in highestwicketsByAplayerMatch %}
+                    <div class="row my-5">
+		          		<div class="col-md-6">
+		          			<p><strong>Name:</strong> <a id="{{ player.name }}" onclick="getplayer(id)">{{ player.name }}</a></p>
+		          			<p><strong>Match:</strong> <span>{{ player.team1 }} vs {{ player.team2 }}</span></p>
+		          			<p><strong>Match Date:</strong> <span>{{ player.date }}</span></p>
+                            <p><strong>Overs Bowled:</strong> <span>{{ player.overs }}</span></p>
+                            <p><strong>Given Runs:</strong> <span>{{ player.givenrun }}</span></p>
+                            <p><strong>Wickets:</strong> <span>{{ player.wickets }}</span></p>
+{#                            <p><strong>Sixes:</strong> <span>{{ player.sixes }}</span></p>#}
+		          		</div>
+	          		</div>
+                    {% endfor %}
+          		</div>
+
+                <div class="profile ftco-animate">
+	          		<h2 class="mb-4">Maximum Runs by a Player in full career</h2>
+{#	          		<h4 class="mb-4">{{ name }} is a {{ details.role }}</h4>#}
+{#	          		<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>#}
+	          		{% for player in highestRunByAplayerCareer %}
+                    <div class="row my-5">
+		          		<div class="col-md-6">
+		          			<p><strong>Name:</strong> <a id="{{ player.name }}" onclick="getplayer(id)">{{ player.name }}</a></p>
+{#		          			<p><strong>Match:</strong> <span>{{ player.team1 }} vs {{ player.team2 }}</span></p>#}
+{#		          			<p><strong>Match Date:</strong> <span>{{ player.date }}</span></p>#}
+                            <p><strong>Scored Run:</strong> <span>{{ player.run }}</span></p>
+                            <p><strong>Batting average:</strong> <span>{{ player.avg }}</span></p>
+                            <p><strong>Batting Strike Rate:</strong> <span>{{ player.strate }}</span></p>
+{#                            <p><strong>Sixes:</strong> <span>{{ player.sixes }}</span></p>#}
+		          		</div>
+	          		</div>
+                    {% endfor %}
+          		</div>
+
+
+                <div class="profile ftco-animate">
+	          		<h2 class="mb-4">Maximum Wickets by a player in full career</h2>
+{#	          		<h4 class="mb-4">{{ name }} is a {{ details.role }}</h4>#}
+{#	          		<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>#}
+	          		{% for player in highestwicketsByAplayerCareer %}
+                    <div class="row my-5">
+		          		<div class="col-md-6">
+		          			<p><strong>Name:</strong> <a id="{{ player.name }}" onclick="getplayer(id)">{{ player.name }}</a></p>
+{#		          			<p><strong>Match:</strong> <span>{{ player.team1 }} vs {{ player.team2 }}</span></p>#}
+{#		          			<p><strong>Match Date:</strong> <span>{{ player.date }}</span></p>#}
+                            <p><strong>Overs Bowled:</strong> <span>{{ player.overs }}</span></p>
+                            <p><strong>Bowling Average:</strong> <span>{{ player.bowlavg }}</span></p>
+                            <p><strong>Wickets:</strong> <span>{{ player.wickets }}</span></p>
+{#                            <p><strong>Sixes:</strong> <span>{{ player.sixes }}</span></p>#}
+		          		</div>
+	          		</div>
+                    {% endfor %}
+          		</div>
+
+                <div class="profile ftco-animate">
+	          		<h2 class="mb-4">Maximum Runs in a match</h2>
+{#	          		<h4 class="mb-4">{{ name }} is a {{ details.role }}</h4>#}
+{#	          		<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>#}
+	          		{% for player in highestScoredMatch %}
+                    <div class="row my-5">
+		          		<div class="col-md-6">
+{#		          			<p><strong>Name:</strong> <span>{{ player.name }}</span></p>#}
+		          			<p><strong>Match:</strong> <span>{{ player.team1 }} vs {{ player.team2 }}</span></p>
+		          			<p><strong>Match Date:</strong> <span>{{ player.date }}</span></p>
+                            <p><strong>Winner :</strong> <span>{{ player.winner }}</span></p>
+                            <h3>Scorecard: <button class="btn-success" onclick="myFunction('{{ player.mid }}')">Scorecard</button></h3>
+{#                            <p><strong>Balls Batted:</strong> <span>{{ player.balls }}</span></p>#}
+{#                            <p><strong>Fours:</strong> <span>{{ player.fours }}</span></p>#}
+{#                            <p><strong>Sixes:</strong> <span>{{ player.sixes }}</span></p>#}
+		          		</div>
+	          		</div>
+                    {% endfor %}
+          		</div>
+
+                <div class="profile ftco-animate">
+	          		<h2 class="mb-4">Maximum Win by a team</h2>
+{#	          		<h4 class="mb-4">{{ name }} is a {{ details.role }}</h4>#}
+{#	          		<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>#}
+	          		{% for player in MaxWinTeams %}
+                    <div class="row my-5">
+		          		<div class="col-md-6">
+		          			<p><strong>Name:</strong> <span>{{ player.name }}</span></p>
+{#		          			<p><strong>Match:</strong> <span>{{ player.team1 }} vs {{ player.team2 }}</span></p>#}
+{#		          			<p><strong>Match Date:</strong> <span>{{ player.date }}</span></p>#}
+                            <p><strong>Short Name:</strong> <span>{{ player.tid }}</span></p>
+                            <p><strong>Total Win:</strong> <span>{{ player.win }}</span></p>
+                            <p><strong>Total Lose:</strong> <span>{{ player.lose }}</span></p>
+{#                            <p><strong>Sixes:</strong> <span>{{ player.sixes }}</span></p>#}
+		          		</div>
+	          		</div>
+                    {% endfor %}
+          		</div>
+
+                <div class="profile ftco-animate">
+	          		<h2 class="mb-4">Maximum Lose by a team</h2>
+{#	          		<h4 class="mb-4">{{ name }} is a {{ details.role }}</h4>#}
+{#	          		<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>#}
+	          		{% for player in MaxLoseTeams %}
+                    <div class="row my-5">
+		          		<div class="col-md-6">
+		          			<p><strong>Name:</strong> <span>{{ player.name }}</span></p>
+{#		          			<p><strong>Match:</strong> <span>{{ player.team1 }} vs {{ player.team2 }}</span></p>#}
+{#		          			<p><strong>Match Date:</strong> <span>{{ player.date }}</span></p>#}
+                            <p><strong>Short Name:</strong> <span>{{ player.tid }}</span></p>
+                            <p><strong>Total Win:</strong> <span>{{ player.win }}</span></p>
+                            <p><strong>Total Lose:</strong> <span>{{ player.lose }}</span></p>
+{#                            <p><strong>Sixes:</strong> <span>{{ player.sixes }}</span></p>#}
+		          		</div>
+	          		</div>
+                    {% endfor %}
+          		</div>
+
+          	</div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- loader -->
+      <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+      </div>
+
+    </div>
+
+
+    <script src="{% static 'playersingle/js/jquery.min.js' %}"></script>
+    <script src="{% static 'playersingle/js/jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'playersingle/js/popper.min.js' %}"></script>
+    <script src="{% static 'playersingle/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'playersingle/js/jquery.easing.1.3.js' %}"></script>
+    <script src="{% static 'playersingle/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'playersingle/js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'playersingle/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'playersingle/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'playersingle/js/aos.js' %}"></script>
+    <script src="{% static 'playersingle/js/jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'playersingle/js/scrollax.min.js' %}"></script>
+    <script src="{% static 'playersingle/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'playersingle/js/jquery.timepicker.min.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{% static 'playersingle/js/google-map.js' %}"></script>
+    <script src="{% static 'playersingle/js/main.js' %}"></script>
+  <script>
+          document.getElementById('nav-about').hidden=true;
+          document.getElementById('nav-series').hidden=true;
+          document.getElementById('nav-teams').hidden=true;
+          document.getElementById('nav-contact').hidden=true;
+          document.getElementById('nav-grounds').hidden=true;
+          document.getElementById('nav-videos').hidden=true;
+          document.getElementById('nav-images').hidden=true;
+          document.getElementById('nav-stats').hidden=true;
+    </script>
+  <script>
+            function myFunction(match_id) {
+              window.location.href = "{% url 'matchsingle' %}" +"?id="+match_id;
+            }
+          function getplayer(ID) {
+            var txt = document.getElementById(ID).innerText;
+            window.location.href = "{% url 'playersingle' %}" +"?name="+txt;
+          }
+    </script>
+    
+  </body>
+</html>
+{% endblock %}
